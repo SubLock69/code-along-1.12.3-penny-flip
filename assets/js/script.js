@@ -1,12 +1,41 @@
-// TODO: Declare any global variables we need
+//Globals
+let heads = 0, tails = 0;
 
-
+//MAIN
 document.addEventListener('DOMContentLoaded', function () {
-    // This is just a sanity check to make sure your JavaScript script is getting loaded
-    // You can remove it once you see it in your browser console in the developer tools
-    console.log('Hi')
+    //Locals
+    let headsImg = 'assets/images/penny-heads.jpg';
+    let tailsImg = 'assets/images/penny-tails.jpg';
+    let img = document.getElementById('penny-image');
 
-    // TODO: Add event listener and handler for flip and clear buttons
+    // Event Listeners for buttons
+    document.getElementById('flip').addEventListener('click', func => {
+        let rand = Math.round(Math.random());
+        if(rand) { //Heads = 1
+            img.setAttribute('src',headsImg);
+            ++heads;
+            document.getElementById('heads').textContent = heads;
+            document.getElementById('heads-percent').textContent = `${Math.round(100*(heads/(heads+tails)),2)}%`;
+            document.getElementById('tails-percent').textContent = `${Math.round(100*(tails/(heads+tails)),2)}%`;
+            document.getElementById('message').textContent = "You Flipped Heads!";
+        } else { //Tails = 0
+            img.setAttribute('src',tailsImg);
+            ++tails;
+            document.getElementById('tails').textContent = tails;
+            document.getElementById('tails-percent').textContent = `${Math.round(100*(tails/(heads+tails)),2)}%`;
+            document.getElementById('heads-percent').textContent = `${Math.round(100*(heads/(heads+tails)),2)}%`;
+            document.getElementById('message').textContent = "You Flipped Tails!";
+        }
+    });
+    document.getElementById('clear').addEventListener('click', func => {
+        heads = 0; tails = 0;
+        img.setAttribute('src',headsImg);
+        document.getElementById('heads').textContent = "0";
+        document.getElementById('heads-percent').textContent = "0%";
+        document.getElementById('tails').textContent = "0";
+        document.getElementById('tails-percent').textContent = "0%";
+        document.getElementById('message').textContent = "Let's Get Rolling!";
+    });
 
     // Flip Button Click Handler
         // TODO: Determine flip outcome
